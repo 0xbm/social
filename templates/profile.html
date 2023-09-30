@@ -7,7 +7,12 @@
                 <div class="col-8">
                     <h1>{{ profile.user.username }} Profile</h1>
                 </div>
-                <div class="col-4">
+                {% for post in posts %}
+                    <div class="alert alert-dark" role="alert">
+                        {{ post }} </br></br>
+                    </div>
+                {% endfor %}
+                <div class="col-4"></div><br/><br/>
                     <div class="card">
                         <div class="card-header">
                             Follows
@@ -32,7 +37,8 @@
                                 {% endfor %}
                             </p>
                         </div>
-                    </div><br/>
+                    </div>
+                    <br/>
                     <form method="POST">
                         {% csrf_token %}
                         {% if profile in user.profile.follows.all %}
@@ -42,7 +48,8 @@
                             <button class="btn btn-outline-success" name="follow" value="follow" type="submit">FOLLOW
                                 @{{ profile.user.username|lower }}</button>
                         {% endif %}
-                    </form><br/>
+                    </form>
+                    <br/>
                 </div>
             </div>
         </div>
