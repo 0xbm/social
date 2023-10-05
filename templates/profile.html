@@ -20,6 +20,10 @@
                 {% endfor %}
                 <div class="col-4"></div>
                 <br/><br/>
+                {% if profile.profile_image %}
+                    <img src=" {{ profile.profile_image.url }}" alt="">
+                    <br/><br/>
+                {% endif %}
                 <div class="card">
                     <div class="card-header">
                         Follows
