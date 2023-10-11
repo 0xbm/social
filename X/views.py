@@ -120,8 +120,7 @@ def post_like(request, pk):
             post.likes.remove(request.user)
         else:
             post.likes.add(request.user)
-
-        return redirect('home')
+        return redirect(request.META.get('HTTP_REFERER'))
 
 
     else:
