@@ -6,8 +6,6 @@
     <div class="container text-center">
         <div class="row">
             <div class="col-8">
-                <h1>POSTS</h1>
-                {% for post in posts %}
                     <div class="alert alert-dark" role="alert">
                         <div class="container">
                             <div class="row">
@@ -36,13 +34,10 @@
                                 {% else %}
                                     <a href="{% url 'post_like' post.id %}">Like</a>
                                 {% endif %}
-                                &nbsp;&nbsp;
-                                <a href="{% url 'post_share'  post.id %}">Share</a>
                             </small>
                         </div>
                     </div>
                     </br></br>
-                {% endfor %}
             </div>
             <div class="col-4">
                 <br/><br/><br/>

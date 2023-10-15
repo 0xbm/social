@@ -121,8 +121,15 @@ def post_like(request, pk):
         else:
             post.likes.add(request.user)
         return redirect(request.META.get('HTTP_REFERER'))
-
-
     else:
         messages.success(request, ("You Must Be Logged In"))
     return redirect("home")
+
+
+def post_share(request, pk):
+    post = get_object_or_404(Post, id=pk)
+    if post:
+        return render(request, 'share_post.html', {"post": post})
+    else:
+        messages.success(request, ("That Meep Does Not Exist..."))
+        return redirect('home')
