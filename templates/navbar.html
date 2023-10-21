@@ -1,3 +1,5 @@
+{% load static %}
+
 <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'home' %}">X</a>
@@ -11,25 +13,42 @@
                     <a class="nav-link" href="{% url 'profile_list' %}">Profile List</a>
                 </li>
                 {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'profile' request.user.id %}">My Profile</a>
-                    </li>
+                    {#                    <li class="nav-item">#}
+                    {#                        <a class="nav-link" href="{% url 'profile' request.user.id %}">My Profile</a>#}
+                    {#                    </li>#}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                     </li>
                 {% else %}
-                     <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link" href="{% url 'register' %}">Register</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'login' %}">Login</a>
                     </li>
                 {% endif %}
-            </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+
+                {% if user.is_authenticated %}
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-link navbar-brand">
+                            <a href="{% url 'profile' request.user.id %}">
+                                {% if user.profile.profile_image %}
+                                    <img src="{{ profile.profile_image.url }}" width="200" height="200"
+                                         alt="" width="30"
+                                            {{ profile.user.username }}>
+                                {% else %}
+                                    <img src="{% static 'images/default_pic.png' %}" class="img-fluid rounded-circle"
+                                         alt="Profile Image" width="30">
+                                {% endif %}
+                            </a>
+                        </li>
+                    </ul>
+                    </ul>
+                {% endif %}
+            {#            <form class="d-flex" role="search">#}
+            {#                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">#}
+            {#                <button class="btn btn-outline-success" type="submit">Search</button>#}
+            {#            </form>#}
         </div>
     </div>
 </nav>
