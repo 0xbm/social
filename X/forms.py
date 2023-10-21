@@ -6,10 +6,26 @@ from django.contrib.auth.models import User
 
 class ProfilePicForm(forms.ModelForm):
     profile_image = forms.ImageField(label="Profile Picture")
+    profile_bio = forms.CharField(label="", widget=forms.Textarea(attrs={"placeholder": "Profile Bio",
+                                                                                    "class": "form-control"
+                                                                                    }))
+    homepage_link = forms.CharField(label="", widget=forms.TextInput(attrs={"placeholder": "Homepage Link",
+                                                                                         "class": "form-control"
+                                                                                         }))
+    facebook_link = forms.CharField(label="", widget=forms.TextInput(attrs={"placeholder": "Facebook Link",
+                                                                                         "class": "form-control"
+                                                                                         }))
+    instagram_link = forms.CharField(label="",
+                                     widget=forms.TextInput(attrs={"placeholder": "Instagram Link",
+                                                                   "class": "form-control"
+                                                                   }))
+    linkedin_link = forms.CharField(label="", widget=forms.TextInput(attrs={"placeholder": "Linkedin Link",
+                                                                                         "class": "form-control"
+                                                                                         }))
 
     class Meta:
         model = Profile
-        fields = ('profile_image',)
+        fields = ('profile_image', 'profile_bio', 'homepage_link', 'facebook_link', 'instagram_link', 'linkedin_link')
 
 
 class PostForm(forms.ModelForm):
@@ -20,7 +36,7 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        exclude = ("user","likes")
+        exclude = ("user", "likes")
 
 
 class SignUpForm(UserCreationForm):

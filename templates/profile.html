@@ -3,7 +3,7 @@
 
 {% block content %}
     {% if profile %}
-        <div class="container text-center">
+        <div class="container text-center" xmlns="http://www.w3.org/1999/html">
             <div class="row">
                 <div class="col-8">
                     <h1>{{ profile.user.username }} Profile</h1>
@@ -48,6 +48,28 @@
             {% if profile.profile_image %}
                 <img src=" {{ profile.profile_image.url }}" alt="" class="rounded-circle">
                 <br/><br/>
+            {% endif %}
+            {% if profile.homepage_link %}
+                <a href="{{ profile.homepage_link }}" target="new">HomePage</a>
+            {% endif %}&nbsp;&nbsp;
+            {% if profile.facebook_link %}
+                <a href="{{ profile.facebook_link }}" target="new">Facebook</a>
+            {% endif %}&nbsp;&nbsp;
+            {% if profile.instagram_link %}
+                <a href="{{ profile.instagram_link }}" target="new">Instagram</a>
+            {% endif %}&nbsp;&nbsp;
+            {% if profile.linkedin_link %}
+                <a href=" {{ profile.linkedin_link }}" target="new">Linkedin</a>
+            {% endif %}
+            <br/><br/>
+            {% if profile.profile_bio %}
+                {{ profile.profile_bio }}
+            {% endif %}
+            <br/><br/>
+            {% if profile.profile_bio %}
+                <p align="justify">
+                    {{ profile.profile_bio }}
+                </p>
             {% endif %}
             <div class="card">
                 <div class="card-header">
