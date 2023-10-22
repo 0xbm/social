@@ -12,5 +12,6 @@ urlpatterns = [
     path('post_like/<int:pk>', views.post_like, name='post_like'),
     path('post_share/<int:pk>', views.post_share, name='post_share'),
     path('unfollow/<int:pk>', views.unfollow, name='unfollow'),
+    path('follow/<int:pk>', views.follow, name='follow'),
 
 ]
