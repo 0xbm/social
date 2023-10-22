@@ -91,7 +91,8 @@
                 <div class="card-body">
                     <p class="card-text">
                         {% for following in profile.followed_by.all %}
-                            <a href="{% url 'profile' following.user.id %}">@{{ following }}</a><br/>
+                            <a href="{% url 'profile' following.user.id %}">@{{ following }}</a>
+                            <a href="{% url 'unfollow' following.user.id %}">Unfollow</a><br/>
                         {% endfor %}
                     </p>
                 </div>
@@ -111,7 +112,6 @@
             {% if request.user.id == profile.user.id %}
                 <a href="{% url 'update_user' %}" class="btn btn-outline-secondary">Update Profile</a>
             {% endif %}
-        </div>
         </div>
     {% endif %}
 {% endblock %}
