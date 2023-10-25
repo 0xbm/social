@@ -35,6 +35,9 @@
                                         {% else %}
                                             <a href="{% url 'post_like' post.id %}">Like</a>
                                         {% endif %}
+                                        {% if request.user.username == profile.user.username %}
+                                            <a href="{% url 'delete_post' post.id %}">Delete</a>
+                                        {% endif %}
                                     </small></br></br>
                                 </div>
                             </div>
@@ -81,9 +84,9 @@
                             <a href="{% url 'profile' following.user.id %}">@{{ following }}</a>
                             <a href="{% url 'unfollow' following.user.id %}">Unfollow</a><br/>
                         {% endfor %}
-                        <div class="card-footer text-end"><a href="{% url 'follows' profile.user.id %}"
+                    <div class="card-footer text-end"><a href="{% url 'follows' profile.user.id %}"
                                                          class="btn btn-sm btn-outline-secondary">See all...</a>
-                        </div>
+                    </div>
                     </p>
                 </div>
             </div>
