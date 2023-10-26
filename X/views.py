@@ -198,3 +198,25 @@ def delete_post(request, pk):
     else:
         messages.success(request, ("Please Log In First"))
         return redirect(request.META.get('HTTP_REFERER'))
+
+
+def edit_post(request, pk):
+    if request.user.is_authenticated:
+        post = get_object_or_404(Post, id=pk)
+        if request.user.username == post.user.username:
+            form = PostForm(request.POST or None, instance=post)
+            if request.method == "POST":
+                if form.is_valid():
+                    post = form.save(commit=False)
+                    post.user = request.user
+                    post.save()
+                    messages.success(request, ("Your Post Updated !!!"))
+                    return redirect('home')
+            else:
+                return render(request, "edit_post.html", {'form': form, 'post': post})
+        else:
+            messages.success(request, ("You Dont own That Post"))
+            return redirect("home")
+    else:
+        messages.success(request, ("Please Log In First"))
+        return redirect('home')

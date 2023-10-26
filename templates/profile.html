@@ -37,6 +37,7 @@
                                         {% endif %}
                                         {% if request.user.username == profile.user.username %}
                                             <a href="{% url 'delete_post' post.id %}">Delete</a>
+                                            <a href="{% url 'edit_post' post.id %}">Edit</a>
                                         {% endif %}
                                     </small></br></br>
                                 </div>
