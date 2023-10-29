@@ -3,8 +3,8 @@ from .models import Profile, Post
 from django.contrib import messages
 from .forms import PostForm, SignUpForm, ProfilePicForm
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm
-from django import forms
+# from django.contrib.auth.forms import UserCreationForm
+# from django import forms
 from django.contrib.auth.models import User
 
 
@@ -229,3 +229,12 @@ def search(request):
         return render(request, "search.html", {'search': search, 'searched': searched})
     else:
         return render(request, "search.html", {})
+
+
+def search_user(request):
+    if request.method == "POST":
+        search = request.POST['search']
+        searched = User.objects.filter(username__contains=search)
+        return render(request, "search_user.html", {'search': search, 'searched': searched})
+    else:
+        return render(request, "search_user.html", {})
