@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <h1>SEARCH POST</h1><br/>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="search" class="form-control" placeholder="Search Post" name="search"><br/>
+        <br/>
+        <button type="submit" class="btn btn-secondary">Search Post</button>
+        <br/><br/>
+    </form>
+    {% if search %}
+        {% for post in searched %}
+            <div class="alert alert-dark" role="alert">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-1">
+                            {% if post.user.profile.profile_image %}
+                                <img src="{{ post.user.profile.profile_image.url }}"
+                                     width="50" height="50" class="rounded-circle"
+                                     alt="{{ profile.user.username }}">
+                            {% else %}
+                                <img src="{% static 'images/default_pic.png' %}"
+                                     width="50" height="50" class="rounded-circle"
+                                     alt="{{ profile.user.username }}">
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-11">
+                    {{ post.body }}<br/>
+                    <small class="text-muted">
+                        {{ post.created_at }}
+                        by
+                        @{{ post.user.username }}
+                        - {{ post.number_of_likes }} Likes - {{ user }}
+                        {% if user in post.likes.all %}
+                            <a href="{% url 'post_like' post.id %}">UnLike</a>
+                        {% else %}
+                            <a href="{% url 'post_like' post.id %}">Like</a>
+                        {% endif %}
+                        &nbsp;&nbsp;
+                        <a href="{% url 'post_share'  post.id %}">Share</a>
+                    </small>
+                </div>
+            </div>
+            </br></br>
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}
